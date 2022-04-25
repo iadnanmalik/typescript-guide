@@ -1,4 +1,4 @@
-# Practise Typescript
+# Typescript-guide
 
 This repo contains a src>main.ts file which includes all the beginner level concepts with examples needed to understand typescript.
 
