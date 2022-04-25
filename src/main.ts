@@ -18,11 +18,11 @@ console.log(getFUllName("Good", "Morning"))
 //There is no entity definition in javascript
 // : { name: string;  age: number;} --> entity definition
 const user : { name: string;  age: number;} = {
-    name: "adnan",
+    name: "john",
     age: 18
 };
 const user2 : { name: string;  age: number;} = {
-    name:"ahmad",
+    name:"doe",
     age: 19
 };
 //entity definitions can be given via interfaces in typescript class
@@ -49,7 +49,7 @@ interface funcUser {
 }
 var age=10;
 const funcUser : funcUser = {
-    name:"ahmad",
+    name:"doe",
     age: 12,
     getFUllTest : function() {
          console.log(this.age)
@@ -163,7 +163,7 @@ class Admin extends User {
     }
 }
 //With these lines everything in User becomes accesible by admin
-const admin1= new Admin("Adnan","Ahmad")
+const admin1= new Admin("john","doe")
 console.log(admin1.getFUllName())
 
 
@@ -177,7 +177,7 @@ const addId = <T>(obj : T)  => {
     }
 }
 const testuser = {
-    name : "Adnan"
+    name : "john"
 }
 const result = addId(testuser)
 //Now we can see that if we hover over addId it shows that the type of
@@ -199,7 +199,7 @@ const addIdExp = <T extends object>(obj : T)  => {
     }
 }
 //Now we have made sure that the input in the generic will always be an object
-// const result2= addIdExp("adnan") -> Error
+// const result2= addIdExp("john") -> Error
 const result2 = addIdExp<ITestUser>(testuser)
 
 
@@ -211,7 +211,7 @@ interface genUser<T> {
 }
 
 let genUser : genUser<{age : number}> = {
-    name : "adnan",
+    name : "john",
     data : { age: 10 }
 }
 
