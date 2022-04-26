@@ -1,13 +1,13 @@
 const hello = "hello"
 //const becomes a type because of const
-let hello_1 =  "world"
+let helloWithLet =  "world"
 //now type of hello_1 is string
 //BEST PRACTISE
-let hello_2 : string  = "world"
+let helloWithDeclaration: string  = "world"
 
 // -----------------------------------------------------------------
 //FUNCTIONS
-const getFUllName = (name : string,surname : string ) : string => {
+const getFUllName = (name: string,surname: string ): string => {
     return name + " " + surname;
 }
 
@@ -16,12 +16,12 @@ console.log(getFUllName("Good", "Morning"))
 // -----------------------------------------------------------------
 //OBJECTS
 //There is no entity definition in javascript
-// : { name: string;  age: number;} --> entity definition
-const user : { name: string;  age: number;} = {
+//: { name: string;  age: number;} --> entity definition
+const user: { name: string;  age: number;} = {
     name: "john",
     age: 18
 };
-const user2 : { name: string;  age: number;} = {
+const user2: { name: string;  age: number;} = {
     name:"doe",
     age: 19
 };
@@ -35,7 +35,7 @@ interface EzUser {
     name?: string;
     age?: number;
 }
-const ezUser : EzUser = {
+const ezUser: EzUser = {
 };
 
 
@@ -45,13 +45,13 @@ const ezUser : EzUser = {
 interface funcUser {
     name?: string;
     age?: number;
-    getFUllTest?() : string;
+    getFUllTest?(): string;
 }
 var age=10;
-const funcUser : funcUser = {
+const funcUser: funcUser = {
     name:"doe",
     age: 12,
-    getFUllTest : function() {
+    getFUllTest: function() {
          console.log(this.age)
          return "Returning a string"
     }
@@ -66,21 +66,22 @@ console.log(funcUser.getFUllTest())
 //Union in typescript
 let username: string = "name";
 let password: string | null = null;
-interface IUseru {
+interface IUserUnion {
     name: string;
     surname: string;
 }
-let useru: IUseru | null = null;
+let userUnion: IUserUnion | null = null;
 
 
 // -----------------------------------------------------------------
 //Type Aliasing
 //type aliasing means using the type keyword for aliasing the basic types
-type TypeTest = string;
+type aliasString = string;
+
 // Void in typescript
 // void is a set of undefined and null
-const doSomething = () : void => {
-    console.log(doSomething);
+const doSomething = (): void => {
+    console.log("doSomething");
 }
 //when we don't return anything typescript returns void from that function
 
@@ -92,7 +93,7 @@ const doSomething = () : void => {
 
 // -----------------------------------------------------------------
 //Never in typescript
-const doSomethingNever = () : never => {
+const doSomethingNever = (): never => {
     throw "never"
 }
 
@@ -101,31 +102,31 @@ const doSomethingNever = () : never => {
 //Unknwon in typescript
 let vAny: any = 10;
 let vUnknown: unknown = 10;
-let teststr: string = vAny
+let testStr: string = vAny
 // let teststr1: string = vUnknown -> Error: Type 'unknown' is not assignable to type 'string'.
 
 
 // -----------------------------------------
 //Type Assertion in typescript
 //To make unknown to be assigned to type 'string'
-let teststr1: string = vUnknown as string
-let pagNum : string = "1";
-// let numericPagNum : number  = pagNum as number;
+let testStrUnknown: string = vUnknown as string
+let pagNum: string = "1";
+// let numericPagNum: number  = pagNum as number;
 // -> Conversion of type 'string' to type 'number' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first.ts(2352)
-let numericPagNum : number  = (pagNum as unknown) as number;
+let numericPagNum: number  = (pagNum as unknown) as number;
 
 
 // -----------------------------------------------------------------
 //TypeScript working with dom examples
 const someElem  = document.querySelector('.foo')
 // console.log(someElem.value) // Error value doesnt eist on someElem
-const someElem1 = document.querySelector(".foo") as HTMLInputElement
-console.log(someElem1.value)
+const someElemTypeCasted = document.querySelector(".foo") as HTMLInputElement
+console.log(someElemTypeCasted.value)
 //Works fine
-someElem1.addEventListener("blur", (e) => {
-    // console.log(e.target.value) // Error value doesnt eist on someElem1
+someElemTypeCasted.addEventListener("blur", (e) => {
+    // console.log(e.target.value) // Error value doesnt eist on someElemTypeCasted
 })
-someElem1.addEventListener("blur", (e) => {
+someElemTypeCasted.addEventListener("blur", (e) => {
     const target = e.target as HTMLInputElement
     console.log(target.value) 
 })
@@ -145,7 +146,7 @@ class User {
         this.lastName = lastName;
     }
 
-    getFUllName() : string{
+    getFUllName(): string{
         return this.firstName + ' ' + this.lastName;
     }
 }
@@ -158,18 +159,18 @@ class User {
 //Inheritance in ts
 class Admin extends User {
     private editor: string
-    setEditor(editor: string) : void {
+    setEditor(editor: string): void {
        this.editor = editor;
     }
 }
 //With these lines everything in User becomes accesible by admin
-const admin1= new Admin("john","doe")
-console.log(admin1.getFUllName())
+const admin= new Admin("john","doe")
+console.log(admin.getFUllName())
 
 
 // -----------------------------------------------------------------
 //Generics in ts
-const addId = <T>(obj : T)  => {
+const addId = <T>(obj: T)  => {
     const id = '22111';
     return {
         ...obj,
@@ -177,11 +178,11 @@ const addId = <T>(obj : T)  => {
     }
 }
 const testuser = {
-    name : "john"
+    name: "john"
 }
 const result = addId(testuser)
 //Now we can see that if we hover over addId it shows that the type of
-//generic is { name : string }
+//generic is { name: string }
 //Lets add interface to it
 
 interface ITestUser{
@@ -191,7 +192,7 @@ const result1 = addId<ITestUser>(testuser)
 //Although it means totally the same as above but this is more clear way for reading
 
 //Lets tweak the function
-const addIdExp = <T extends object>(obj : T)  => {
+const addIdExp = <T extends object>(obj: T)  => {
     const id = '22111';
     return {
         ...obj,
@@ -210,9 +211,9 @@ interface genUser<T> {
     data: T
 }
 
-let genUser : genUser<{age : number}> = {
-    name : "john",
-    data : { age: 10 }
+let genUser: genUser<{age: number}> = {
+    name: "john",
+    data: { age: 10 }
 }
 
 // -----------------------------------------------------------------
