@@ -254,3 +254,59 @@ let c: Circle = {
     kind: ShapeKind.Circle,
     radius: 100,
 };
+
+
+//----------------------------------------------------------------
+// Union type and discriminated unions
+// Discriminated unions and strict null checks
+
+interface Dog{
+    kind: 'dog';
+    barking: string;
+}
+
+interface Cat{
+    kind: 'cat';
+    meowing: string;
+}
+
+type Animal = Dog | Cat;
+
+
+function fail(arg:never):never{
+    throw new Error()
+}
+
+function AninmalSounds(animal: Animal): string{
+    switch(animal.kind){
+        case 'cat':
+            return 'The cat started mewoing';
+        case 'dog':
+            return 'The dog started barking';
+        default:
+            return fail(animal)
+    }
+}
+//----------------------------------------------------------------
+//Index types generics and keyof
+
+//In case of javascript typeof returns the the type of the data. The keyof property in typescript works a little bit different
+class Company{
+    name: string;
+    type: string;
+}
+
+type CompProps = keyof Company
+
+const comp = {
+    name:'test'
+}
+type comppro  = typeof comp
+
+// In case of keyof it works as a loop and loops throught all the types of the class. In case of typeof it gets the structure in its type
+//The function below is an excellent use case of keyof and illustrates how keys of an object can be used to define types
+function pluck <T,R extends keyof T>(obj: T, propertyNames: R[]){
+    return propertyNames.map((key) => obj[key])
+}
+
+console.log(pluck({name:'adnan',car:'4x4'},['car']))
